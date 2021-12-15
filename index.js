@@ -25,22 +25,22 @@ function getItems(){
 function generateItems(items){
    
 
-    let itemsHtml = "";
+    let todo = "";
     items.forEach((items) => {
-        itemsHTML += `
+       todo += `
         <div class="todo-item">
             <div class="check">
               <div class="check-mark checked">
                 <img src="assets/icon-check.svg" />
               </div>
             </div>
-            <div class="todo-text checked"> ${items.text} </div>
+            <div class="todo-text"> ${items.text} </div>
           </div>
         `
 
         
     })
-    document.querySelector(".todo-items").innerHTML = itemsHtml;
+    document.querySelector(".todo-items").innerHTML = todo;
 
 }
 
