@@ -37,6 +37,8 @@ function generateItems(items){
             <div class="todo-text checked"> ${items.text} </div>
           </div>
         `
+
+        
     })
     document.querySelector(".todo-items").innerHTML = itemsHtml;
 
