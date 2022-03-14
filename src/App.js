@@ -1,18 +1,37 @@
 import "./App.css";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { TaskAdd } from "./TaskAdd";
 import { TaskList } from "./TaskList";
+
+import { db } from "./firebase.js";
+
 let bool = true;
 function App() {
   const [tasks, setTasks] = useState([]);
 
+  useEffect(() => {
+    db.collection("hello").onSnapshot((snapshot) => {
+      const myList = snapshot.docs.map((doc) => {
+        return {
+          id: doc.id,
+          ...doc.data(),
+        };
+      });
+      setTasks(myList);
+    }); 
+  }, []);
+
   const addNewTask = (newTask) => {
-    setTasks([...tasks, newTask]);
+    db.collection("hello").add(
+     newTask,
+    );
+    // setTasks([...tasks, newTask]);
   };
 
   const removeTask = (index) => {
-    const newTasks = tasks.filter((_el, i) => index !== i);
-    setTasks(newTasks);
+    // const newTasks = tasks.filter((_el, i) => index !== i);
+    db.collection("hello").doc(index).delete();
+    // setTasks(newTasks);
   };
 
   const checkTask = (index) => {
@@ -20,11 +39,12 @@ function App() {
 
     for (let i = 0; i < tasks.length; i++) {
       if (index === i) {
-        bool = !bool;
         if (bool) {
           tasks[i].checked = "completed";
+          bool = !bool;
         } else {
           tasks[i].checked = "not";
+          bool = !bool;
         }
       }
 

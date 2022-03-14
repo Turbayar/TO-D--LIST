@@ -1,5 +1,4 @@
 export const TaskDetail = ({ title, onDelete, onCheck, addclass }) => {
-  console.log(addclass);
   return (
     <div>
       <div className="todo-container">

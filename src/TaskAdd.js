@@ -7,7 +7,7 @@ export const TaskAdd = ({ addNewTask, setTasks, tasks }) => {
     if (!title) {
       return;
     }
-    addNewTask({ title: title, checked: "not" });
+    addNewTask({ title: title, });
     setTitle("");
   };
 
