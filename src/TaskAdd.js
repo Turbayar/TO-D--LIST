@@ -1,13 +1,12 @@
 import { useState } from "react";
 
-export const TaskAdd = ({ addNewTask, setTasks, tasks }) => {
+export const TaskAdd = ({ addNewTask, setTasks, tasks, select, setSelect }) => {
   const [title, setTitle] = useState("");
-  const [select, setSelect] = useState("");
   const onClick = () => {
     if (!title) {
       return;
     }
-    addNewTask({ title: title, });
+    addNewTask({ title: title, isDone: false, createdDate:new Date(), });
     setTitle("");
   };
 
@@ -15,17 +14,6 @@ export const TaskAdd = ({ addNewTask, setTasks, tasks }) => {
     setTitle(e.target.value);
   };
 
-  const changeSelect = (e) => {
-    setSelect(e.target.value);
-    let newArray = tasks;
-
-    if (e.target.value === "completed") {
-  
-    } else if (e.target.value === "uncompleted") {
-
-    }
-    setTasks(newArray);
-  };
   return (
     <div>
       <header>
@@ -45,8 +33,10 @@ export const TaskAdd = ({ addNewTask, setTasks, tasks }) => {
           <select
             name="todos"
             value={select}
-            onChange={changeSelect}
             className="filter-todo"
+            onChange={(e) => {
+              setSelect(e.target.value);
+            }}
           >
             <option value="all">All</option>
             <option value="completed">Completed</option>

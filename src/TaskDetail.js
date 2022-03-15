@@ -1,10 +1,15 @@
-export const TaskDetail = ({ title, onDelete, onCheck, addclass }) => {
+export const TaskDetail = ({ title, onDelete, onCheck, done }) => {
   return (
     <div>
       <div className="todo-container">
         <ul className="todo-list">
           <div className="todo">
-            <li className={("todo-item ", addclass ? addclass : "")}>
+            <li
+              className={
+                ("todo-item ",
+                done ? "completed" : "")
+              }
+            >
               {title}
             </li>
             <button className="complete-btn" onClick={onCheck}>
